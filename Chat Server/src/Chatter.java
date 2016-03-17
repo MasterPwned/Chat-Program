@@ -22,7 +22,13 @@ public class Chatter extends Thread {
 		BufferedReader in = getBufferedReader(o);
 		while(running) {
 			try {
-				cs.sendMessage(in.readLine());
+				String message = in.readLine();
+				if(message == null) {
+					running = false;
+				} else {
+					cs.sendMessage(message);
+				}
+				
 			} catch (IOException e) {
 				running = false;
 			}
